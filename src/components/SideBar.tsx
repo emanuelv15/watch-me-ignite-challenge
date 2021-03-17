@@ -5,18 +5,24 @@ import { api } from '../services/api';
 
 import '../styles/sidebar.scss';
 
+interface SideBarProps {
+  selectedGenre: GenreResponseProps,
+  setSelectedGenre: any,
+  selectedGenreId: number,
+  setSelectedGenreId: any,
+
+}
+
 interface GenreResponseProps {
   id: number;
   name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
   title: string;
 }
 
-export function SideBar() {
+export function SideBar({ selectedGenreId, setSelectedGenreId, selectedGenre, setSelectedGenre, ...rest }: SideBarProps) {
   // Complete aqui
 
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
-  const [selectedGenreId, setSelectedGenreId] = useState(1);
-  const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({} as GenreResponseProps);
 
   useEffect(() => {
     api.get<GenreResponseProps[]>('genres').then(response => {
